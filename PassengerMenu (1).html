@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      padding-bottom: 100px;
+    }
+
+    header {
+      background-color: white;
+      color: #184485;
+      padding: 10px;
+      text-align: center;
+    }
+
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+
+    .menu-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-item img {
+      max-width: 100%;
+      height: 100px;
+      border-radius: 8px;
+      margin-bottom: 10px; /* Add margin at the bottom */
+    }
+
+    .img {
+      margin: 10px;
+    }
+
+    .title {
+      margin-right: 12.5%;
+    }
+
+    .cart button {
+      background-color: #a01d22;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart {
+      background-color: #184485;
+      color: #fff;
+      padding-bottom: 18px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .cart-items {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+    }
+
+    .cart-items span {
+      margin-right: 10px;
+    }
+
+    .counter-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Align items vertically in the center */
+      margin-top: 5px;
+    }
+
+    .counter-buttons button {
+      font-size: 16px;
+      padding: 5px 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      overflow-y: scroll;
+      height: 250px;
+      width: 250px;
+      position: fixed;
+      bottom: 100;
+    }
+
+    /* Style for the modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="img">
+        <img align="left" src="https://www.aa.com/content/images/icons-logos/logos/logo-american-short-header.png" alt="americanairlinesheader"
+            width="200"
+            height="50">
+    </div>
+    <div class="title">
+        <h1>Complimentary Food/Drink Menu</h1>
+    </div>
+  </header>
+  <section>
+    <div class="menu-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsw729_lBPoIlO0G_kwUDYC15qX7LdYXwcQA&usqp=CAU" alt="Pretzels">
+      <h2>Pretzels</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterPretzels')">-</button>
+        <span id="counterPretzels">0</span>
+        <button onclick="increment('counterPretzels')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtp8CH-dhw8FfntoQVu3bJRBfalUd9G6DDRw&usqp=CAU" alt="Biscoff Cookies">
+      <h2>Biscoff Cookies</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterCookies')">-</button>
+        <span id="counterCookies">0</span>
+        <button onclick="increment('counterCookies')">+</button>
+      </div>
+    </div>
+
+    <!-- Add more menu items as needed -->
+
+    <div class="menu-item">
+      <img src="https://patastonecrab.com/cdn/shop/products/coca-cola-classic-can-800x800_800x.png?v=1605032863" alt="Coke">
+      <h2>Coke</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterCoke')">-</button>
+        <span id="counterCoke">0</span>
+        <button onclick="increment('counterCoke')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://i5.walmartimages.com/seo/Diet-Coke-355ml-12-fl-oz_ea26ba5c-dafa-4e8d-94c1-2a87995653b5.630289760d208771432fd1bd81fd5f7d.jpeg" alt="Diet Coke">
+      <h2>Diet Coke</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterDietCoke')">-</button>
+        <span id="counterDietCoke">0</span>
+        <button onclick="increment('counterDietCoke')">+</button>
+      </div>
+    </div>
+
+    <!-- Add more drink options as needed -->
+
+    <!-- Additional Drinks -->
+    <div class="menu-item">
+      <img src="https://us.coca-cola.com/content/dam/nagbrands/us/coke/en/products/coke-zero-sugar/pdp-hero-kozs-Mobile.png" alt="Coke Zero">
+      <h2>Coke Zero</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterCokeZero')">-</button>
+        <span id="counterCokeZero">0</span>
+        <button onclick="increment('counterCokeZero')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://beverageuniverse.com/media/catalog/product/cache/93e8b54da979dc164f600faa0f1e0941/d/r/dr.-pepper-xrdp-main.jpg" alt="Dr. Pepper">
+      <h2>Dr. Pepper</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterDr.Pepper')">-</button>
+        <span id="counterDr.Pepper">0</span>
+        <button onclick="increment('counterDr.Pepper')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://m.media-amazon.com/images/I/61h+oOR1VaL.jpg" alt="Diet Dr. Pepper">
+      <h2>Diet Dr. Pepper</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterDietDr.Pepper')">-</button>
+        <span id="counterDietDr.Pepper">0</span>
+        <button onclick="increment('counterDietDr.Pepper')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://m.media-amazon.com/images/I/71-29yqCPzL.jpg" alt="Sprite">
+      <h2>Sprite</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterSprite')">-</button>
+        <span id="counterSprite">0</span>
+        <button onclick="increment('counterSprite')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://125626576.cdn6.editmysite.com/uploads/1/2/5/6/125626576/s456845222234713709_p344_i2_w1700.jpeg" alt="Diet Sprite">
+      <h2>Diet Sprite</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterDietSprite')">-</button>
+        <span id="counterDietSprite">0</span>
+        <button onclick="increment('counterDietSprite')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://target.scene7.com/is/image/Target/GUEST_de07f157-b20f-4c1f-9403-9551e17b2473?wid=488&hei=488&fmt=pjpeg" alt="Aha Lime + Watermelon">
+      <h2>Aha Lime + Watermelon</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterAhaLimeWatermelon')">-</button>
+        <span id="counterAhaLimeWatermelon">0</span>
+        <button onclick="increment('counterAhaLimeWatermelon')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://i5.walmartimages.com/asr/2c1481bc-a36d-4428-baa5-cee912ed386b.4c0251002edfcc06cea44adee6ee60a8.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="Canada Dry Club Soda">
+      <h2>Canada Dry Club Soda</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterCanadaDryClubSoda')">-</button>
+        <span id="counterCanadaDryClubSoda">0</span>
+        <button onclick="increment('counterCanadaDryClubSoda')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://www.sxmleshalles.com/3189-large_default/canada-dry-tonic-water-can-x-6.jpg" alt="Canada Dry Tonic Water">
+      <h2>Canada Dry Tonic Water</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterCanadaDryTonicWater')">-</button>
+        <span id="counterCanadaDryTonicWater">0</span>
+        <button onclick="increment('counterCanadaDryTonicWater')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://i5.walmartimages.com/asr/7b923995-be4a-4d49-8cda-962eed283285.be3e8560d8370517f745663141b4e750.jpeg" alt="Canada Dry Ginger Ale">
+      <h2>Canada Dry Ginger Ale</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterCanadaDryGingerAle')">-</button>
+        <span id="counterCanadaDryGingerAle">0</span>
+        <button onclick="increment('counterCanadaDryGingerAle')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://www.shutterstock.com/image-photo/white-cup-black-coffee-isolated-600nw-1183800493.jpg" alt="FreshBrew Coffeehouse Roast">
+      <h2>FreshBrew Coffeehouse Roast</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterFreshBrewCoffeehouseRoast')">-</button>
+        <span id="counterFreshBrewCoffeehouseRoast">0</span>
+        <button onclick="increment('counterFreshBrewCoffeehouseRoast')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://img.freepik.com/premium-vector/jar-decaf-coffee-icon-cartoon-jar-decaf-coffee-vector-icon-web-design-isolated-white-background_98402-48912.jpg?w=2000" alt="FreshBrew Decaffeinated Coffeehouse Roast">
+      <h2>FreshBrew Decaffeinated Coffeehouse Roast</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterFreshBrewDecaffeinatedCoffeehouseRoast')">-</button>
+        <span id="counterFreshBrewDecaffeinatedCoffeehouseRoast">0</span>
+        <button onclick="increment('counterFreshBrewDecaffeinatedCoffeehouseRoast')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://m.media-amazon.com/images/I/81ZMdzycRtL.jpg" alt="Bigelow Tea">
+      <h2>Bigelow Tea</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterBigelowTea')">-</button>
+        <span id="counterBigelowTea">0</span>
+        <button onclick="increment('counterBigelowTea')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://m.media-amazon.com/images/I/81Y1sqRpToL.jpg" alt="Mott's Tomato Juice">
+      <h2>Mott's Tomato Juice</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterMottsTomatoJuice')">-</button>
+        <span id="counterMottsTomatoJuice">0</span>
+        <button onclick="increment('counterMottsTomatoJuice')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://m.media-amazon.com/images/I/8173sD-ADeL.jpg" alt="Mr. + Mrs. T Bloody Mary Mix">
+      <h2>Mr. & Mrs. T Bloody Mary Mix</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterMr.&Mrs.TBloodyMaryMix')">-</button>
+        <span id="counterMr.&Mrs.TBloodyMaryMix">0</span>
+        <button onclick="increment('counterMr.&Mrs.TBloodyMaryMix')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://www.kroger.com/product/images/large/front/0002500005684" alt="Minute Maid Apple Juice">
+      <h2>Minute Maid Apple Juice</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterMinuteMaidAppleJuice')">-</button>
+        <span id="counterMinuteMaidAppleJuice">0</span>
+        <button onclick="increment('counterMinuteMaidAppleJuice')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/71K7JTYqjLL.jpg" alt="Minute Maid Cranberry Apple">
+      <h2>Minute Maid Cranberry Apple</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterMinuteMaidCranberryApple')">-</button>
+        <span id="counterMinuteMaidCranberryApple">0</span>
+        <button onclick="increment('counterMinuteMaidCranberryApple')">+</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://bevmo.com/cdn/shop/products/d9889a4c-b9c4-446e-b241-29ac8f0afc89.png?v=1701151170" alt="Minute Maid Orange Juice">
+      <h2>Minute Maid Orange Juice</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterMinuteMaidOrangeJuice')">-</button>
+        <span id="counterMinuteMaidOrangeJuice">0</span>
+        <button onclick="increment('counterMinuteMaidOrangeJuice')">+</button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img src="https://www.sherwoodbrewing.com/wp-content/uploads/2021/05/screw-top-gettyimages-85210965.jpg" alt="Bottled Water">
+      <h2>Bottled Water</h2>
+      <div class="counter-buttons">
+        <button onclick="decrement('counterBottledWater')">-</button>
+        <span id="counterBottledWater">0</span>
+        <button onclick="increment('counterBottledWater')">+</button>
+      </div>
+    </div>
+
+    <!-- Repeat the above block for additional drinks -->
+
+  </section>
+
+  <div class="cart">
+    <h2></h2>
+    <div class="cart-items" id="cartItems">
+      <button onclick="openCartSummary()">Checkout</button>
+      <!-- Cart items will be displayed here -->
+    </div>
+  </div>
+
+  <!-- Button to toggle order history visibility -->
+  <!-- <button id="toggleHistoryBtn" onclick="toggleOrderHistory()">Toggle Order History</button> -->
+
+  <!-- Add a new section for order history -->
+  <section id="orderHistory" style="display: none;">
+    <h2>Order History</h2>
+    <ul id="orderHistoryList">
+      <!-- Order history items will be displayed here -->
+    </ul>
+  </section>
+
+  
+
+
+
+  <!-- Modal for Cart Summary -->
+  <div class="modal" id="cartSummaryModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCartSummary()">&times;</span>
+   <h2>Cart Summary</h2>
+      <div>
+        <label for="seatNumber">Seat Number:</label> 
+        <input type="text" id="seatNumber" placeholder="Enter seat number"> <br>
+        <br>
+      </div>
+      <div id="cartSummaryItems">
+        <!-- Cart summary items will be displayed here -->
+      </div> <br>
+      <button class="confirm-button" onclick="confirmOrder()">Confirm Order</button>
+    </div>
+  </div>
+
+  <script>
+    const items = [];
+    
+    function increment(counterId) {
+      var counterElement = document.getElementById(counterId);
+      var currentValue = parseInt(counterElement.textContent);
+      counterElement.textContent = currentValue + 1;
+    }
+
+    function decrement(counterId) {
+      var counterElement = document.getElementById(counterId);
+      var currentValue = parseInt(counterElement.textContent);
+      if (currentValue > 0) {
+        counterElement.textContent = currentValue - 1;
+      }
+    }
+    
+    /* Functions for cart summary */
+    function openCartSummary() {
+      var modal = document.getElementById('cartSummaryModal');
+      modal.style.display = 'block';
+
+      // Get menu items and their counters
+      var menuItems = document.querySelectorAll('.menu-item');
+      var cartSummaryItems = document.getElementById('cartSummaryItems');
+      cartSummaryItems.innerHTML = ''; // Clear existing content
+
+      // Iterate through menu items
+      menuItems.forEach(function(item) {
+        var counterElement = item.querySelector('.counter-buttons span');
+        var counterValue = parseInt(counterElement.textContent);
+        
+        // If counter is greater than 0, add to cart summary
+        if (counterValue > 0) {
+          var itemName = item.querySelector('h2').textContent;
+          var cartItem = document.createElement('div');
+          cartItem.textContent = itemName + ' x ' + counterValue;
+          cartSummaryItems.appendChild(cartItem);
+          items.push(itemName + ' x ' + counterValue);
+        }
+      });
+
+      
+    }
+
+    function closeCartSummary() {
+      var modal = document.getElementById('cartSummaryModal');
+      modal.style.display = 'none';
+    }
+
+    // Close the modal if the user clicks outside of it
+    window.onclick = function(event) {
+      var modal = document.getElementById('cartSummaryModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+    console.log(items)
+    const details = []
+    function confirmOrder() {
+      var seatNumber = document.getElementById('seatNumber').value;
+
+      // Perform actions when the user confirms the order
+      // For example, you can send the order details to the server
+      // or display a confirmation message to the user
+      var orderDetails = { seatNumber: seatNumber, items: [...items] };
+      console.log('Order confirmed:', orderDetails);
+      details.push(orderDetails);
+
+      // Retrieve existing order history from local storage
+      var existingOrderHistory = JSON.parse(localStorage.getItem('array')) || [];
+
+      // Add the new order to the existing order history
+      existingOrderHistory.push(orderDetails);
+
+      // Store the updated order history in local storage
+      localStorage.setItem('array', JSON.stringify(existingOrderHistory));
+
+      // Update the order history
+      updateOrderHistory(orderDetails);
+      // Store the order in a list (you can send it to the server here)
+      storeOrder(orderDetails);
+
+      // Update the order history
+        updateOrderHistory(orderDetails);
+      
+
+        // Clear the cart and close the modal
+        clearCart();
+        closeCartSummary();
+    }
+
+    function storeOrder(orderDetails) {
+      // Here, you can store the order in a list or send it to the server
+      // For now, let's log it to the console
+      console.log("Order stored:", orderDetails);
+    }
+    
+    function updateOrderHistory(orderDetails) {
+      // Update the order history list
+      var orderHistoryList = document.getElementById('orderHistoryList');
+      var listItem = document.createElement('li');
+      listItem.textContent = JSON.stringify(orderDetails);
+      orderHistoryList.appendChild(listItem);
+      const histarray = [orderHistoryList]
+      localStorage.setItem('longarray', JSON.stringify(histarray));
+
+
+      
+    }
+    function toggleOrderHistory() {
+      var orderHistory = document.getElementById('orderHistory');
+      orderHistory.style.display = (orderHistory.style.display === 'none' || orderHistory.style.display === '') ? 'block' : 'none';
+    }
+
+    function clearCart() {
+      // Clear the cart items and reset counters
+      items.length = 0;
+      var menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(function(item) {
+        var counterElement = item.querySelector('.counter-buttons span');
+        counterElement.textContent = '0';
+      });
+
+      // Clear the seat number input
+      document.getElementById('seatNumber').value = '';
+    }
+
+    // Store order history in local storage
+    function storeOrderHistoryInLocalStorage() {
+      localStorage.setItem('orderHistory', JSON.stringify(items));
+    }
+
+    // Load order history from local storage
+    function loadOrderHistoryFromLocalStorage() {
+      var storedOrderHistory = localStorage.getItem('orderHistory');
+      if (storedOrderHistory) {
+        items.push(JSON.parse(storedOrderHistory));
+      }
+    }
+
+    loadOrderHistoryFromLocalStorage();
+    
+  </script>
+
+</body>
+</html>
